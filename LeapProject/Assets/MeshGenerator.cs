@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +10,8 @@ public class MeshGenerator : MonoBehaviour
 
     public int xSize = 20;
     public int zSize = 20;
-    public int yHeight = 0;
+    public float y = 0;
+    public bool isIncline = false;
 
     Mesh mesh;
     Vector3[] vertices;
@@ -32,9 +34,13 @@ public class MeshGenerator : MonoBehaviour
         {
             for(int x = 0; x <= xSize; x++)
             {
-                vertices[i] = new Vector3(x, yHeight, z);
+                vertices[i] = new Vector3(x, y, z);
                 i++;
             }
+            if(isIncline)
+            {
+                y += 0.25f;
+            } 
         }
 
         triangles = new int[xSize * zSize * 6];
