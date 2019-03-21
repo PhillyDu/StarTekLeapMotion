@@ -74,14 +74,7 @@ public class LeapCarController : MonoBehaviour
 
     public void OnDrivingStay()
     {
-        if(Time.time - startTime > 1)
-        {
-            inputTorque = 0.75f;
-        }
-        if(Time.time - startTime > 2)
-        {
-            inputTorque = 1;
-        }
+        inputTorque = 0.75f;
     }
 
     public void OnDrivingEnd()
