@@ -15,10 +15,12 @@ public class ShootingPlayerController : MonoBehaviour
     public float damage = 10f;
     public float range = 50f;
     public float fireRate = 0.25f;
+    public Vector3 offset;
 
     private bool isAiming;
     private bool isShooting;
     private Vector3 direction;
+    private Vector3 reticlePosition;
 
     Ray ray;
     RaycastHit hit;
@@ -29,6 +31,8 @@ public class ShootingPlayerController : MonoBehaviour
     {
         isAiming = false;
         isShooting = false;
+        pistol.SetActive(false);
+        reticle.SetActive(false);
     }
 
     // Update is called once per frame
@@ -36,7 +40,8 @@ public class ShootingPlayerController : MonoBehaviour
     {
         if(isAiming)
         {
-            direction = pointerIndex.transform.position - pointerBase.transform.position;
+            direction = -(pointerBase.transform.position - pointerIndex.transform.position);
+            reticlePosition = direction * 10f;
             Aim();
             if(isShooting)
             {
@@ -47,7 +52,14 @@ public class ShootingPlayerController : MonoBehaviour
 
     void Aim()
     {
+        pistol.transform.position = pointerBase.transform.position + offset;
+        pistol.transform.rotation = Quaternion.LookRotation(direction);
+        reticle.transform.position = reticlePosition;
+        reticle.transform.rotation = Quaternion.identity;
+        if(Physics.Raycast(pointerIndex.transform.position, direction, out hit, range))
+        {
 
+        }
     }
 
     void Shoot()
@@ -69,6 +81,8 @@ public class ShootingPlayerController : MonoBehaviour
 
     public void OnAimingEnd()
     {
+        pistol.SetActive(false);
+        reticle.SetActive(false);
         isAiming = false;
     }
 
