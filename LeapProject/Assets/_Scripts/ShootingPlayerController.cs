@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class ShootingPlayerController : MonoBehaviour
 {
-
-    // pointerIndex and pointerBase used to calculate direction vector
-    // pistol
     public GameObject pointerIndex;
     public GameObject pointerBase;
     public GameObject player;
@@ -16,41 +13,39 @@ public class ShootingPlayerController : MonoBehaviour
     public GameObject muzzleFlash;
     public GameObject impact;
     public float damage = 10f;
-    public float range = 25;
-    public float reticleRange = 25;
-    public float fireRate = 3f;
+    public float range = 50f;
+    public float fireRate = 2f;
     public float impactForce = 35f;
-    public float translationSpeed;
 
     private Vector3 movementOffset;
     private bool isAiming;
     private bool isShooting;
     private Vector3 direction;
     private float nextTimeToFire = 0f;
-    private Vector3 reticleOffset;
-    private Vector3 pistolOffset;
 
+    private Vector3 initialPlayerPosition;
+    private float speed;
+
+    Rigidbody rb;
     Ray ray;
     RaycastHit hit;
 
     // Start is called before the first frame update
     void Start()
     {
-        pistolOffset.x = -0.025f;
-        pistolOffset.y = 0f;
-        pistolOffset.z = 0f;
-        reticleOffset.y = 0.4f;
-        reticleOffset.z = 0f;
         isAiming = false;
         isShooting = false;
         pistol.SetActive(false);
         reticle.SetActive(false);
-
+        rb = player.GetComponent<Rigidbody>();
+        speed = player.GetComponent<FollowPath>().translationSpeed;
+        initialPlayerPosition = player.transform.position;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        movementOffset = (player.transform.position - initialPlayerPosition) * speed * speed;
         if(isAiming)
         {
             direction = -(pointerBase.transform.position - pointerIndex.transform.position);
@@ -61,21 +56,24 @@ public class ShootingPlayerController : MonoBehaviour
                 Shoot();
             }
         }
+        initialPlayerPosition = player.transform.position;
     }
 
     void Aim()
     {
-        pistol.transform.position = pointerBase.transform.position + pistolOffset;
+        pistol.transform.position = pointerBase.transform.position;
         pistol.transform.rotation = Quaternion.LookRotation(direction);
-        reticleOffset.x = direction.x * 2.5f;
-        reticle.transform.position = (direction * reticleRange) + reticleOffset;
-        reticle.transform.rotation = Quaternion.identity;
+        if (Physics.Raycast(pointerIndex.transform.position, direction, out hit, range))
+        {
+            reticle.transform.position = hit.point;
+            reticle.transform.rotation = Quaternion.LookRotation(hit.normal);
+        }
     }
 
     void Shoot()
     {
         GameObject muzzleFlashEffect = Instantiate(muzzleFlash,
-            pistol.transform.GetChild(0).gameObject.transform.position,
+            pistol.transform.GetChild(0).gameObject.transform.position + movementOffset,
             Quaternion.LookRotation(direction));
         Destroy(muzzleFlashEffect, 0.25f);
         if (Physics.Raycast(pointerIndex.transform.position, direction, out hit, range))
