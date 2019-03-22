@@ -13,11 +13,13 @@ public class ShootingPlayerController : MonoBehaviour
     public GameObject pistol;
     public GameObject reticle;
     public GameObject muzzleFlash;
+    public GameObject impact;
     public float damage = 10f;
     public float range = 50f;
     public float fireRate = 15f;
     public float reticleRange = 10f;
-    public Vector3 offset;
+    public Vector3 pistolOffset;
+    public Vector3 reticleOffset;
 
     private bool isAiming;
     private bool isShooting;
@@ -43,7 +45,7 @@ public class ShootingPlayerController : MonoBehaviour
         if(isAiming)
         {
             direction = -(pointerBase.transform.position - pointerIndex.transform.position);
-            reticlePosition = direction * reticleRange;
+            reticlePosition = (direction * reticleRange) + reticleOffset;
             Aim();
             if(isShooting && Time.time >= nextTimeToFire)
             {
@@ -55,7 +57,7 @@ public class ShootingPlayerController : MonoBehaviour
 
     void Aim()
     {
-        pistol.transform.position = pointerBase.transform.position + offset;
+        pistol.transform.position = pointerBase.transform.position + pistolOffset;
         pistol.transform.rotation = Quaternion.LookRotation(direction);
         reticle.transform.position = reticlePosition;
         reticle.transform.rotation = Quaternion.identity;
@@ -69,7 +71,12 @@ public class ShootingPlayerController : MonoBehaviour
         Destroy(muzzleFlashEffect, 0.25f);
         if (Physics.Raycast(pointerIndex.transform.position, direction, out hit, range))
         {
-            Destroy(hit.transform.gameObject);
+            GameObject impactEffect = Instantiate(impact, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(impactEffect, 0.2f);
+            if(hit.transform.CompareTag("Target"))
+            {
+                Destroy(hit.transform.gameObject);
+            }
         }
     }
 
