@@ -4,10 +4,21 @@ using UnityEngine;
 
 public class ShootingPlayerController : MonoBehaviour
 {
+
+    // pointerIndex and pointerBase used to calculate direction vector
+    // pistol
     public GameObject pointerIndex;
     public GameObject pointerBase;
+
+    public GameObject pistol;
     public GameObject reticle;
+    public float damage = 10f;
     public float range = 50f;
+    public float fireRate = 0.25f;
+
+    private bool isAiming;
+    private bool isShooting;
+    private Vector3 direction;
 
     Ray ray;
     RaycastHit hit;
@@ -16,37 +27,63 @@ public class ShootingPlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        isAiming = false;
+        isShooting = false;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        ray = new Ray(pointerIndex.transform.position, pointerIndex.transform.TransformDirection(Vector3.right));
-
-        Debug.DrawRay(pointerIndex.transform.position, pointerIndex.transform.TransformDirection(Vector3.right) * range, Color.yellow);
-
-        if(Physics.Raycast(pointerIndex.transform.position, pointerIndex.transform.TransformDirection(Vector3.right), out hit, range))
+        if(isAiming)
         {
-            reticle.transform.position = hit.transform.position;
+            direction = pointerIndex.transform.position - pointerBase.transform.position;
+            Aim();
+            if(isShooting)
+            {
+                Shoot();
+            }
         }
+    }
+
+    void Aim()
+    {
+
+    }
+
+    void Shoot()
+    {
+
+    }
+
+    public void OnAimingStart()
+    {
+        pistol.SetActive(true);
+        reticle.SetActive(true);
+        isAiming = true;
+    }
+
+    public void OnAimingStay()
+    {
+
+    }
+
+    public void OnAimingEnd()
+    {
+        isAiming = false;
     }
 
     public void OnShootingStart()
     {
-        //Enable reticle
-        reticle.SetActive(true);
+        isShooting = true;
     }
 
     public void OnShootingStay()
     {
-        //Aiming
         
     }
 
     public void OnShootingEnd()
     {
-        //Disable reticle
-        reticle.SetActive(false);
+        isShooting = false;
     }
 }

@@ -1319,12 +1319,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &1623950016 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1876213024429600, guid: 57bf5071e0a1c8947b8918a8f96184a6,
-    type: 3}
-  m_PrefabInstance: {fileID: 1659815880}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1659815880
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1397,21 +1391,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1659815881}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4aa15b0f7ad4032419b77c5387c4a590, type: 3}
+  m_Script: {fileID: 11500000, guid: b222a3804586f8b45bb7d00c7f6c17d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pistol: {fileID: 1659815881}
-  hand: {fileID: 1863817275}
   pointerIndex: {fileID: 1863817274}
-  muzzleFlashLocation: {fileID: 1623950016}
-  offset: {x: -0.05, y: 0, z: 0}
-  range: 100
-  impactForce: 30
-  fireRate: 4
-  muzzleFlash: {fileID: 6966128533681314195, guid: 81bf11b04bcae7142937ac7fb69969bf,
-    type: 3}
-  impactEffect: {fileID: 5988507878025018464, guid: ddf5a34f36424a94aaaac6bbbc9afeeb,
-    type: 3}
+  pointerBase: {fileID: 1863817275}
+  reticle: {fileID: 0}
+  range: 50
 --- !u!1 &1700182104
 GameObject:
   m_ObjectHideFlags: 0
