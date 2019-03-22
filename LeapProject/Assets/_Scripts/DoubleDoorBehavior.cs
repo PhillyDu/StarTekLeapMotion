@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorBehavior : MonoBehaviour
+public class DoubleDoorBehavior : MonoBehaviour
 {
     public GameObject button;
-    public GameObject leftDoor;
-    public GameObject rightDoor;
+    public GameObject door;
     public Material redButtonMaterial;
 
     private Renderer buttonRenderer;
@@ -19,19 +18,15 @@ public class DoorBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     public void OnPress()
     {
         buttonRenderer.material = redButtonMaterial;
-        if(leftDoor != null)
+        if(door != null)
         {
-            Destroy(leftDoor.transform.gameObject);
-        }
-        if(rightDoor != null)
-        {
-            Destroy(rightDoor.transform.gameObject);
+            Destroy(door.transform.gameObject);
         }
     }
 }

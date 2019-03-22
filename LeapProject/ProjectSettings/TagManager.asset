@@ -8,6 +8,7 @@ TagManager:
   - Target
   - Canvas
   - FxTemporaire
+  - SpawnCube1
   layers:
   - Default
   - TransparentFX
