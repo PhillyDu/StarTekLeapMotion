@@ -15,7 +15,8 @@ public class FollowPath : MonoBehaviour
     #region Public Variables
     public MovementType Type = MovementType.MoveTowards; // Movement type used
     public MovementPath MyPath; // Reference to Movement Path Used
-    public float Speed = 1; // Speed object is moving
+    public float translationSpeed = 1f; // Speed object is moving
+    public float rotationSpeed = 1f;
     public float MaxDistanceToGoal = .1f; // How close does it have to be to the point to be considered at point
     #endregion //Public Variables
 
@@ -64,17 +65,15 @@ public class FollowPath : MonoBehaviour
         if (Type == MovementType.MoveTowards) //If you are using MoveTowards movement type
         {
             //Move to the next point in path using MoveTowards
-            transform.position =
-                Vector3.MoveTowards(transform.position,
-                                    pointInPath.Current.position,
-                                    Time.deltaTime * Speed);
+            transform.position = Vector3.MoveTowards(transform.position, pointInPath.Current.position, Time.deltaTime * translationSpeed);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, pointInPath.Current.rotation, Time.deltaTime * rotationSpeed);
         }
         else if (Type == MovementType.LerpTowards) //If you are using LerpTowards movement type
         {
             //Move towards the next point in path using Lerp
             transform.position = Vector3.Lerp(transform.position,
                                                 pointInPath.Current.position,
-                                                Time.deltaTime * Speed);
+                                                Time.deltaTime * translationSpeed);
         }
 
         //Check to see if you are close enough to the next point to start moving to the following one
