@@ -1396,6 +1396,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1623950016 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1876213024429600, guid: 57bf5071e0a1c8947b8918a8f96184a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1659815880}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1659815880
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1473,6 +1479,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointerIndex: {fileID: 1863817274}
   pointerBase: {fileID: 1863817275}
+  muzzleFlashLocation: {fileID: 1623950016}
   pistol: {fileID: 1659815881}
   reticle: {fileID: 543724190}
   damage: 10

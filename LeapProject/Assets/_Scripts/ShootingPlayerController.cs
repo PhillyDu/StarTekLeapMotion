@@ -9,6 +9,7 @@ public class ShootingPlayerController : MonoBehaviour
     // pistol
     public GameObject pointerIndex;
     public GameObject pointerBase;
+    public GameObject muzzleFlashLocation;
 
     public GameObject pistol;
     public GameObject reticle;
