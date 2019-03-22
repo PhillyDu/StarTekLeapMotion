@@ -15,20 +15,21 @@ public class ShootingPlayerController : MonoBehaviour
     public GameObject muzzleFlash;
     public GameObject impact;
     public float damage = 10f;
-    public float range = 50f;
-    public float fireRate = 15f;
-    public float reticleRange = 10f;
-    public float impactForce = 30f;
+    public float range = 25;
+    public float reticleRange = 25;
+    public float fireRate = 3f;
+    public float impactForce = 35f;
+
+    public Vector3 reticleOffset;
+    public Vector3 pistolOffset;
+    public Vector3 muzzleFlashOffset;
 
     private bool isAiming;
     private bool isShooting;
     private Vector3 direction;
     private float nextTimeToFire = 0f;
-    private float reticleOffsetX;
-    private float reticleOffsetY = 0.4f;
-    private float reticleOffsetZ = 0f;
-    private Vector3 reticleOffset;
-    private Vector3 pistolOffset;
+    //private Vector3 reticleOffset;
+    //private Vector3 pistolOffset;
 
     Ray ray;
     RaycastHit hit;
