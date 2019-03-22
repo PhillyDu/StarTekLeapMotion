@@ -683,12 +683,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnGestureStart:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1659815882}
+        m_MethodName: OnShootingStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   OnGestureEnd:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1659815882}
+        m_MethodName: OnShootingEnd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   OnGestureStay:
@@ -1396,12 +1418,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &1623950016 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1876213024429600, guid: 57bf5071e0a1c8947b8918a8f96184a6,
-    type: 3}
-  m_PrefabInstance: {fileID: 1659815880}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1659815880
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1479,12 +1495,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointerIndex: {fileID: 1863817274}
   pointerBase: {fileID: 1863817275}
-  muzzleFlashLocation: {fileID: 1623950016}
   pistol: {fileID: 1659815881}
   reticle: {fileID: 543724190}
+  muzzleFlash: {fileID: 100000, guid: 03a4a1935a9f4454c861dfa0aa6df562, type: 3}
   damage: 10
   range: 50
-  fireRate: 0.25
+  fireRate: 3
+  reticleRange: 40
   offset: {x: -0.001, y: 0, z: 0}
 --- !u!1 &1700182104
 GameObject:

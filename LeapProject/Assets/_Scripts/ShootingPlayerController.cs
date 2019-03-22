@@ -9,23 +9,24 @@ public class ShootingPlayerController : MonoBehaviour
     // pistol
     public GameObject pointerIndex;
     public GameObject pointerBase;
-    public GameObject muzzleFlashLocation;
 
     public GameObject pistol;
     public GameObject reticle;
+    public GameObject muzzleFlash;
     public float damage = 10f;
     public float range = 50f;
-    public float fireRate = 0.25f;
+    public float fireRate = 15f;
+    public float reticleRange = 10f;
     public Vector3 offset;
 
     private bool isAiming;
     private bool isShooting;
     private Vector3 direction;
     private Vector3 reticlePosition;
+    private float nextTimeToFire = 0f;
 
     Ray ray;
     RaycastHit hit;
-
 
     // Start is called before the first frame update
     void Start()
@@ -42,10 +43,11 @@ public class ShootingPlayerController : MonoBehaviour
         if(isAiming)
         {
             direction = -(pointerBase.transform.position - pointerIndex.transform.position);
-            reticlePosition = direction * 10f;
+            reticlePosition = direction * reticleRange;
             Aim();
-            if(isShooting)
+            if(isShooting && Time.time >= nextTimeToFire)
             {
+                nextTimeToFire = Time.time + (1f / fireRate);
                 Shoot();
             }
         }
@@ -57,15 +59,18 @@ public class ShootingPlayerController : MonoBehaviour
         pistol.transform.rotation = Quaternion.LookRotation(direction);
         reticle.transform.position = reticlePosition;
         reticle.transform.rotation = Quaternion.identity;
-        if(Physics.Raycast(pointerIndex.transform.position, direction, out hit, range))
-        {
-
-        }
     }
 
     void Shoot()
     {
-
+        GameObject muzzleFlashEffect = Instantiate(muzzleFlash,
+            pistol.transform.GetChild(0).gameObject.transform.position,
+            Quaternion.LookRotation(direction));
+        Destroy(muzzleFlashEffect, 0.25f);
+        if (Physics.Raycast(pointerIndex.transform.position, direction, out hit, range))
+        {
+            Destroy(hit.transform.gameObject);
+        }
     }
 
     public void OnAimingStart()
