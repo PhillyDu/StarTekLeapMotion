@@ -85,9 +85,19 @@ public class ShootingPlayerController : MonoBehaviour
                 hit.rigidbody.AddForce(-hit.normal * impactForce);
             }
             TargetBehavior target = hit.transform.GetComponent<TargetBehavior>();
+            EnemyBehavior enemy = hit.transform.GetComponent<EnemyBehavior>();
+            ButtonBehavior button = hit.transform.GetComponent<ButtonBehavior>();
             if(target != null)
             {
                 target.TakeDamage(damage);
+            }
+            if(enemy != null)
+            {
+                enemy.TakeDamage(damage);
+            }
+            if(button != null)
+            {
+                button.OnPress();
             }
         }
     }
