@@ -18,14 +18,17 @@ public class ShootingPlayerController : MonoBehaviour
     public float range = 50f;
     public float fireRate = 15f;
     public float reticleRange = 10f;
-    public Vector3 pistolOffset;
-    public Vector3 reticleOffset;
+    public float impactForce = 30f;
 
     private bool isAiming;
     private bool isShooting;
     private Vector3 direction;
-    private Vector3 reticlePosition;
     private float nextTimeToFire = 0f;
+    private float reticleOffsetX;
+    private float reticleOffsetY = 0.4f;
+    private float reticleOffsetZ = 0f;
+    private Vector3 reticleOffset;
+    private Vector3 pistolOffset;
 
     Ray ray;
     RaycastHit hit;
@@ -33,6 +36,11 @@ public class ShootingPlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        pistolOffset.x = -0.025f;
+        pistolOffset.y = 0f;
+        pistolOffset.z = 0f;
+        reticleOffset.y = 0.4f;
+        reticleOffset.z = 0f;
         isAiming = false;
         isShooting = false;
         pistol.SetActive(false);
@@ -45,7 +53,6 @@ public class ShootingPlayerController : MonoBehaviour
         if(isAiming)
         {
             direction = -(pointerBase.transform.position - pointerIndex.transform.position);
-            reticlePosition = (direction * reticleRange) + reticleOffset;
             Aim();
             if(isShooting && Time.time >= nextTimeToFire)
             {
@@ -59,7 +66,8 @@ public class ShootingPlayerController : MonoBehaviour
     {
         pistol.transform.position = pointerBase.transform.position + pistolOffset;
         pistol.transform.rotation = Quaternion.LookRotation(direction);
-        reticle.transform.position = reticlePosition;
+        reticleOffset.x = direction.x * 2.5f;
+        reticle.transform.position = (direction * reticleRange) + reticleOffset;
         reticle.transform.rotation = Quaternion.identity;
     }
 
@@ -73,9 +81,14 @@ public class ShootingPlayerController : MonoBehaviour
         {
             GameObject impactEffect = Instantiate(impact, hit.point, Quaternion.LookRotation(hit.normal));
             Destroy(impactEffect, 0.2f);
-            if(hit.transform.CompareTag("Target"))
+            if (hit.rigidbody != null)
             {
-                Destroy(hit.transform.gameObject);
+                hit.rigidbody.AddForce(-hit.normal * impactForce);
+            }
+            TargetBehavior target = hit.transform.GetComponent<TargetBehavior>();
+            if(target != null)
+            {
+                target.TakeDamage(damage);
             }
         }
     }
