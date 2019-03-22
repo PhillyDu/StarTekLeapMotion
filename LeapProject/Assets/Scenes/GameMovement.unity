@@ -1102,8 +1102,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 0
   MyPath: {fileID: 2125833278}
-  translationSpeed: 1
-  rotationSpeed: 60
+  translationSpeed: 3
+  rotationSpeed: 75
   MaxDistanceToGoal: 0.1
 --- !u!1001 &707927117
 PrefabInstance:
@@ -2856,6 +2856,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointerIndex: {fileID: 1290815078}
   pointerBase: {fileID: 116566347}
+  player: {fileID: 0}
   pistol: {fileID: 1419917493}
   reticle: {fileID: 2114887683}
   muzzleFlash: {fileID: 100000, guid: 03a4a1935a9f4454c861dfa0aa6df562, type: 3}
@@ -2865,9 +2866,7 @@ MonoBehaviour:
   reticleRange: 30
   fireRate: 15
   impactForce: 30
-  reticleOffset: {x: 0, y: 0, z: 0}
-  pistolOffset: {x: 0, y: 0, z: 0}
-  muzzleFlashOffset: {x: 0, y: 0, z: 0}
+  translationSpeed: 3
 --- !u!1 &1451137599
 GameObject:
   m_ObjectHideFlags: 0

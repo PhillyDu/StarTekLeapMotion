@@ -9,6 +9,7 @@ public class ShootingPlayerController : MonoBehaviour
     // pistol
     public GameObject pointerIndex;
     public GameObject pointerBase;
+    public GameObject player;
 
     public GameObject pistol;
     public GameObject reticle;
@@ -19,17 +20,15 @@ public class ShootingPlayerController : MonoBehaviour
     public float reticleRange = 25;
     public float fireRate = 3f;
     public float impactForce = 35f;
+    public float translationSpeed;
 
-    public Vector3 reticleOffset;
-    public Vector3 pistolOffset;
-    public Vector3 muzzleFlashOffset;
-
+    private Vector3 movementOffset;
     private bool isAiming;
     private bool isShooting;
     private Vector3 direction;
     private float nextTimeToFire = 0f;
-    //private Vector3 reticleOffset;
-    //private Vector3 pistolOffset;
+    private Vector3 reticleOffset;
+    private Vector3 pistolOffset;
 
     Ray ray;
     RaycastHit hit;
@@ -46,6 +45,7 @@ public class ShootingPlayerController : MonoBehaviour
         isShooting = false;
         pistol.SetActive(false);
         reticle.SetActive(false);
+
     }
 
     // Update is called once per frame
