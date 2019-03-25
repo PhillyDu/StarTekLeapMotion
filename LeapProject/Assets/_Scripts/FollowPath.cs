@@ -66,8 +66,10 @@ public class FollowPath : MonoBehaviour
         {
             //Move to the next point in path using MoveTowards
 
-            transform.position = Vector3.MoveTowards(transform.position, pointInPath.Current.position, Time.deltaTime * translationSpeed);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, pointInPath.Current.rotation, Time.deltaTime * rotationSpeed);
+            transform.position = Vector3.MoveTowards(transform.position, pointInPath.Current.position,
+                Time.deltaTime * translationSpeed);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, pointInPath.Current.rotation,
+                Time.deltaTime * rotationSpeed);
         }
         else if (Type == MovementType.LerpTowards) //If you are using LerpTowards movement type
         {
