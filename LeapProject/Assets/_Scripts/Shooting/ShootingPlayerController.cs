@@ -84,25 +84,15 @@ public class ShootingPlayerController : MonoBehaviour
             {
                 hit.rigidbody.AddForce(-hit.normal * impactForce);
             }
-            TargetBehavior target = hit.transform.GetComponent<TargetBehavior>();
             EnemyBehavior enemy = hit.transform.GetComponent<EnemyBehavior>();
-            DoorBehavior button = hit.transform.GetComponent<DoorBehavior>();
-            DoubleDoorBehavior doubleButton = hit.transform.GetComponent<DoubleDoorBehavior>();
-            if(target != null)
-            {
-                target.TakeDamage(damage);
-            }
+            DoorBehavior door = hit.transform.GetComponent<DoorBehavior>();
             if(enemy != null)
             {
                 enemy.TakeDamage(damage);
             }
-            if(button != null)
+            if(door != null)
             {
-                button.OnPress();
-            }
-            if(doubleButton != null)
-            {
-                doubleButton.OnPress();
+                door.OpenDoor();
             }
         }
     }
