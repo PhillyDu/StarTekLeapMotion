@@ -6,7 +6,7 @@ using UnityEngine;
 // and have IsKinematic checked.
 
 // In GamePath include event system to trigger function for rotation start and target for LookAt function
-public class TranslatePath : MonoBehaviour
+public class TravelPath : MonoBehaviour
 {
     public GamePath gamePath;
     public float translationSpeed = 1f;
