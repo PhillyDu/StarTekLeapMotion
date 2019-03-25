@@ -27,7 +27,6 @@ public class ShootingPlayerController : MonoBehaviour
     private float speed;
 
     Rigidbody rb;
-    Ray ray;
     RaycastHit hit;
 
     // Start is called before the first frame update
@@ -85,14 +84,14 @@ public class ShootingPlayerController : MonoBehaviour
                 hit.rigidbody.AddForce(-hit.normal * impactForce);
             }
             EnemyBehavior enemy = hit.transform.GetComponent<EnemyBehavior>();
-            DoorBehavior door = hit.transform.GetComponent<DoorBehavior>();
+            ButtonManager button = hit.transform.GetComponent<ButtonManager>();
             if(enemy != null)
             {
                 enemy.TakeDamage(damage);
             }
-            if(door != null)
+            if(button != null)
             {
-                door.OpenDoor();
+                button.OnClicked();
             }
         }
     }
@@ -102,11 +101,6 @@ public class ShootingPlayerController : MonoBehaviour
         pistol.SetActive(true);
         reticle.SetActive(true);
         isAiming = true;
-    }
-
-    public void OnAimingStay()
-    {
-
     }
 
     public void OnAimingEnd()
@@ -119,11 +113,6 @@ public class ShootingPlayerController : MonoBehaviour
     public void OnShootingStart()
     {
         isShooting = true;
-    }
-
-    public void OnShootingStay()
-    {
-        
     }
 
     public void OnShootingEnd()
