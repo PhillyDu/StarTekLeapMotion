@@ -10,6 +10,7 @@ public class TranslatePath : MonoBehaviour
 {
     public GamePath gamePath;
     public float translationSpeed = 1f;
+    public float rotationSpeed = 1f;
     public float maxDistanceToGoal = 0.1f;
 
     private IEnumerator<Transform> pointInPath;
@@ -55,15 +56,15 @@ public class TranslatePath : MonoBehaviour
             return;
         }
 
-        nextPosition = Vector3.Normalize(pointInPath.Current.position - transform.position);
+        nextPosition = pointInPath.Current.position - transform.position;
         nextRotation = pointInPath.Current.rotation;
 
-        if (transform.rotation != nextRotation)
+        transform.Translate(Vector3.Normalize(nextPosition) * translationSpeed * Time.deltaTime, Space.World);
+        if(transform.rotation != nextRotation)
         {
-            transform.LookAt(pointInPath.Current.position);
+            transform.Rotate(Vector3.Cross(transform.forward, pointInPath.Current.forward),
+                rotationSpeed * Time.deltaTime, Space.World);
         }
-        
-        transform.Translate(nextPosition * translationSpeed * Time.deltaTime);
 
         distanceSquared = (transform.position - pointInPath.Current.position).sqrMagnitude;
         if(distanceSquared < maxDistanceToGoalSquared)
