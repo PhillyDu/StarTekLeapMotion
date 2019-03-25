@@ -167,7 +167,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9e6fdb7bfc45d4d48ad99eedc050a082, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -186,9 +186,9 @@ Transform:
   m_GameObject: {fileID: 2999726}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
-  m_Father: {fileID: 561112869}
+  m_Father: {fileID: 1699456547}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &152666989
@@ -910,26 +910,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 561112868}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &561112872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 561112871}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47ddd7a6483caa14f8dab712ea97a15a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  reticle: {fileID: 2999726}
-  muzzleFlash: {fileID: 100000, guid: 03a4a1935a9f4454c861dfa0aa6df562, type: 3}
-  impactEffect: {fileID: 100002, guid: 99c73c92ac40473459640b165473206f, type: 3}
-  muzzleFlashLocation: {fileID: 561112870}
-  damage: 10
-  range: 25
-  fireRate: 2
-  impactForce: 35
 --- !u!1001 &696792310
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1309,7 +1289,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1699456550}
-        m_MethodName: OnFiringStart
+        m_MethodName: OnShootingStart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1325,7 +1305,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1699456550}
-        m_MethodName: OnFiringEnd
+        m_MethodName: OnShootingEnd
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1763,7 +1743,7 @@ GameObject:
   - component: {fileID: 1699456550}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1787,6 +1767,7 @@ Transform:
   - {fileID: 1007218390}
   - {fileID: 1544515666}
   - {fileID: 561112869}
+  - {fileID: 2999728}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1820,7 +1801,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gamePath: {fileID: 1410387974}
   translationSpeed: 3
-  rotationSpeed: 47
+  rotationSpeed: 46
   maxDistanceToGoal: 0.1
 --- !u!114 &1699456550
 MonoBehaviour:
@@ -1836,7 +1817,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointerIndex: {fileID: 195402028}
   pointerBase: {fileID: 195402027}
-  pistolController: {fileID: 0}
+  muzzleFlashOrigin: {fileID: 561112870}
+  pistol: {fileID: 561112871}
+  reticle: {fileID: 2999726}
+  muzzleFlashReference: {fileID: 100000, guid: 03a4a1935a9f4454c861dfa0aa6df562, type: 3}
+  impactEffectReference: {fileID: 100002, guid: 99c73c92ac40473459640b165473206f,
+    type: 3}
+  damage: 10
+  range: 50
+  fireRate: 2
+  impactForce: 35
 --- !u!1001 &1782372820
 PrefabInstance:
   m_ObjectHideFlags: 0
