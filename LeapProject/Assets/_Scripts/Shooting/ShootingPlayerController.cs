@@ -85,6 +85,8 @@ public class ShootingPlayerController : MonoBehaviour
             }
             EnemyBehavior enemy = hit.transform.GetComponent<EnemyBehavior>();
             ButtonManager button = hit.transform.GetComponent<ButtonManager>();
+            LeftButtonManager leftButton = hit.transform.GetComponent<LeftButtonManager>();
+            RightButtonManager rightButton = hit.transform.GetComponent<RightButtonManager>();
             if(enemy != null)
             {
                 enemy.TakeDamage(damage);
@@ -92,6 +94,14 @@ public class ShootingPlayerController : MonoBehaviour
             if(button != null)
             {
                 button.OnClicked();
+            }
+            if(leftButton != null)
+            {
+                leftButton.OnLeftClick();
+            }
+            if(rightButton != null)
+            {
+                rightButton.OnRightClick();
             }
         }
     }

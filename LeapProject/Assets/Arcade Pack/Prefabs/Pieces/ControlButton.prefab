@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1605014413881152}
   m_LocalRotation: {x: -0, y: 0.08974507, z: -0, w: 0.99596477}
   m_LocalPosition: {x: 0.44, y: 1.962, z: 0.999}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 7, y: 7, z: 7}
   m_Children:
   - {fileID: 4521449274523124}
   m_Father: {fileID: 0}
@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: f1cddc56f54b37d4492e077601cc3001, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -137,7 +137,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: f1cddc56f54b37d4492e077601cc3001, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -182,5 +182,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 899e02d672d35dd42a7bcdcec92891eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doors: {fileID: 0}
-  redButtonMaterial: {fileID: 0}
+  doors: {fileID: 4695081208505559112, guid: 53ea30c6f47d64146875cce726edcd05, type: 3}
+  redButtonMaterial: {fileID: 2100000, guid: 600ec351a06099241b7fbb3500fdd5af, type: 2}
