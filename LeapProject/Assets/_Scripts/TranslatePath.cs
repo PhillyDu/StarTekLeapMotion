@@ -9,11 +9,12 @@ using UnityEngine;
 public class TranslatePath : MonoBehaviour
 {
     public GamePath gamePath;
-    public float speed = 1f;
+    public float translationSpeed = 1f;
     public float maxDistanceToGoal = 0.1f;
 
     private IEnumerator<Transform> pointInPath;
     private Vector3 nextPosition;
+    private Quaternion nextRotation;
     private float distanceSquared;
     private float maxDistanceToGoalSquared;
 
@@ -28,8 +29,10 @@ public class TranslatePath : MonoBehaviour
 
         pointInPath = gamePath.GetNextPathPoint();
         Debug.Log(pointInPath.Current);
+
         pointInPath.MoveNext();
         Debug.Log(pointInPath.Current);
+
         if(pointInPath.Current == null)
         {
             Debug.LogError("A path must have points in it to be traversed.", gameObject);
@@ -37,6 +40,7 @@ public class TranslatePath : MonoBehaviour
         }
 
         transform.position = pointInPath.Current.position;
+
         maxDistanceToGoalSquared = maxDistanceToGoal * maxDistanceToGoal;
     }
 
@@ -44,16 +48,24 @@ public class TranslatePath : MonoBehaviour
     // Square Magnitude can be taken from either end - start or start - end
     // because of the square the negative is removed from the expression
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(pointInPath == null || pointInPath.Current == null)
         {
             return;
         }
-        nextPosition = pointInPath.Current.position - transform.position;
-        transform.Translate(nextPosition * speed * Time.deltaTime);
 
-        distanceSquared = nextPosition.sqrMagnitude;
+        nextPosition = Vector3.Normalize(pointInPath.Current.position - transform.position);
+        nextRotation = pointInPath.Current.rotation;
+
+        if (transform.rotation != nextRotation)
+        {
+            transform.LookAt(pointInPath.Current.position);
+        }
+        
+        transform.Translate(nextPosition * translationSpeed * Time.deltaTime);
+
+        distanceSquared = (transform.position - pointInPath.Current.position).sqrMagnitude;
         if(distanceSquared < maxDistanceToGoalSquared)
         {
             pointInPath.MoveNext();
